@@ -8,7 +8,7 @@
               v-bind:title="webcam.title"
               v-bind:webcamUrl="webcam.url"
               v-bind:latestData="webcam.updated"
-            /> 
+            />
       </i-row>
     </i-container>
 </template>
@@ -22,6 +22,15 @@ export default {
   components : {
     CardVideo
   },
+  props: {
+    location: {type:String}
+  },
+  beforeUpdate(){
+    console.log("Gallery is about to be updated")
+    // Need to split and concatenate
+    let location_as_gps = this.location.split(/(?:,| )+/)
+    this.getWebcamsData(location_as_gps)
+  },
   data() {
     return {
       webcams: []
@@ -31,8 +40,11 @@ export default {
     this.getWebcamsData()
   },
   methods: {
-    async getWebcamsData() {
-      this.webcams = await getWebcamData()
+    async getWebcamsData(point) {
+      // If no information mentioned just make it undefined
+      if (point == undefined) point = [undefined, undefined]
+      
+      this.webcams = await getWebcamData(point[0], point[1])
       this.webcams = this.webcams.result.webcams
       this.chooseRecentWebcam()
     },

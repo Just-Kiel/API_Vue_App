@@ -1,15 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <GalleryWebcams/>
+  <HeaderHome v-on:new-search="updateGallery"/>
+  <GalleryWebcams v-bind:location="searchLocation"/>
 </template>
 
 <script>
 import GalleryWebcams from './components/Gallery.vue'
+import HeaderHome from './components/Header.vue'
 
 export default {
   name: 'App',
   components: {
-    GalleryWebcams
+    GalleryWebcams,
+    HeaderHome
+  },
+  methods:{
+    updateGallery(search){
+      console.log(search)
+      this.searchLocation = search
+    }
+  },
+  data(){
+    return{
+      searchLocation:''
+    }
   }
 }
 </script>
@@ -21,6 +34,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
