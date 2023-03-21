@@ -10,13 +10,16 @@
             </template>
         </i-input>
 
-        <i-select id="selectNbCameras"
-            v-on:click="newLimit"
-            v-model="selected"
-            :options="optionsNbCameras"
-            label="label"
-            placeholder="Choose number of max cameras.."
-        />
+        <div id="inline">
+            <i-select id="selectNbCameras"
+                v-on:click="newLimit"
+                v-model="selected"
+                :options="optionsNbCameras"
+                label="label"
+                placeholder="Choose number of max cameras.."
+            />
+
+        </div>
     </i-header>
 </template>
 
@@ -32,6 +35,11 @@ export default {
         newLimit() {
             console.log("New limit launched")
             this.$emit('new-limit', this.selected.value)
+        },
+        newTime() {
+            console.log("New time launched")
+            console.log(this.checked)
+            this.$emit('new-time', this.checked)
         }
     },
     data() {
@@ -50,6 +58,14 @@ export default {
                 { value: '90', label: '90 cameras' },
                 { value: '100', label: '100 cameras' },
             ],
+            optionsTimeCamera : [
+                { value : "day", label : "Live"},
+                { value : 1, label : "Day" },
+                { value : 2, label : "Week" },
+                { value : 3, label : "Month" },
+                { value : 4, label : "Year" }
+            ],
+            checked: []
         }
     }
 }
@@ -71,5 +87,10 @@ export default {
 #selectNbCameras {
     margin-top: 10px;
     max-width: 22vw;
+}
+#inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 </style>
