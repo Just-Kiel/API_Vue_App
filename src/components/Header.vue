@@ -9,6 +9,14 @@
                 </i-button>
             </template>
         </i-input>
+
+        <i-select id="selectNbCameras"
+            v-on:click="newLimit"
+            v-model="selected"
+            :options="optionsNbCameras"
+            label="label"
+            placeholder="Choose number of max cameras.."
+        />
     </i-header>
 </template>
 
@@ -21,10 +29,27 @@ export default {
             console.log("Search launched")
             this.$emit('new-search', this.search)
         },
+        newLimit() {
+            console.log("New limit launched")
+            this.$emit('new-limit', this.selected.value)
+        }
     },
     data() {
         return {
-            search: ''
+            search: '',
+            selected: null,
+            optionsNbCameras: [
+                { value: '10', label: '10 cameras' },
+                { value: '20', label: '20 cameras' },
+                { value: '30', label: '30 cameras' },
+                { value: '40', label: '40 cameras' },
+                { value: '50', label: '50 cameras' },
+                { value: '60', label: '60 cameras' },
+                { value: '70', label: '70 cameras' },
+                { value: '80', label: '80 cameras' },
+                { value: '90', label: '90 cameras' },
+                { value: '100', label: '100 cameras' },
+            ],
         }
     }
 }
@@ -42,5 +67,9 @@ export default {
     justify-content: center;
     align-items: center;
     color: white;
+}
+#selectNbCameras {
+    margin-top: 10px;
+    max-width: 22vw;
 }
 </style>

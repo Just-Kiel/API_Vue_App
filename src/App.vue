@@ -1,6 +1,6 @@
 <template>
-  <HeaderHome v-on:new-search="updateGallery"/>
-  <GalleryWebcams v-bind:location="searchLocation"/>
+  <HeaderHome v-on:new-search="updateLocation" v-on:new-limit="updateLimit"/>
+  <GalleryWebcams v-bind:location="searchLocation" v-bind:limit="searchLimit"/>
 </template>
 
 <script>
@@ -14,14 +14,17 @@ export default {
     HeaderHome
   },
   methods:{
-    updateGallery(search){
-      console.log(search)
+    updateLocation(search){
       this.searchLocation = search
+    },
+    updateLimit(limit){
+      this.searchLimit = limit
     }
   },
   data(){
     return{
-      searchLocation:''
+      searchLocation:'',
+      searchLimit: 10
     }
   }
 }
