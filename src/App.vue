@@ -1,6 +1,6 @@
 <template>
-  <HeaderHome v-on:new-search="updateLocation" v-on:new-limit="updateLimit"/>
-  <GalleryWebcams v-bind:location="searchLocation" v-bind:limit="searchLimit"/>
+  <HeaderHome v-model:search="searchLocation" v-model:selected-limit="searchLimit" v-model:checked-time="searchTime"/>
+  <GalleryWebcams v-bind:location="searchLocation" v-bind:limit="searchLimit" v-bind:timeSpecific="searchTime"/>
 </template>
 
 <script>
@@ -13,18 +13,11 @@ export default {
     GalleryWebcams,
     HeaderHome
   },
-  methods:{
-    updateLocation(search){
-      this.searchLocation = search
-    },
-    updateLimit(limit){
-      this.searchLimit = limit
-    }
-  },
   data(){
     return{
       searchLocation:'',
-      searchLimit: 10
+      searchLimit: 10,
+      searchTime: []
     }
   }
 }
