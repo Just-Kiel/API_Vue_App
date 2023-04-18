@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// TODO permit to have each player in a different tab
 export default {
   name: 'CardVideo',
   props: {
@@ -30,5 +29,10 @@ export default {
 .card {
   max-width: 33%;
   min-width: 200px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
 }
 </style>

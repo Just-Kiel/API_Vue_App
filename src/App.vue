@@ -1,18 +1,30 @@
 <template>
-  <HeaderHome v-model:search="searchLocation" v-model:selected-limit="searchLimit" v-model:checked-time="searchTime"/>
-  <GalleryWebcams v-bind:location="searchLocation" v-bind:limit="searchLimit" v-bind:timeSpecific="searchTime"/>
+  <i-layout>
+    <i-layout vertical>
+      <HeaderHome v-model:search="searchLocation" v-model:selected-limit="searchLimit" v-model:checked-time="searchTime"/>
+      <SideBar v-bind:event="searchLocation" 
+      v-model:search="searchLocation"/>
+    </i-layout>
+  
+    <GalleryWebcams v-bind:location="searchLocation" v-bind:limit="searchLimit" v-bind:timeSpecific="searchTime"/>
+    <FooterHome/>
+  </i-layout>
 </template>
 
 <script>
 import GalleryWebcams from './components/Gallery.vue'
 import HeaderHome from './components/Header.vue'
+import FooterHome from './components/Footer.vue'
+import SideBar from './components/SideBar.vue'
 
 export default {
   name: 'App',
   components: {
     GalleryWebcams,
-    HeaderHome
-  },
+    HeaderHome,
+    FooterHome,
+    SideBar
+    },
   data(){
     return{
       searchLocation:'',

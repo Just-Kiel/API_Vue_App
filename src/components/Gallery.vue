@@ -19,6 +19,7 @@ import CardVideo from "./Card.vue"
 import {getWebcamData} from '@/services/webcamAPI.js'
 import {webcamsTreatment, orderWebcams} from '@/services/webcamsTreatment.js'
 import {getGeolocationData} from '@/services/geolocationAPI.js'
+import {setCookie, getCookie} from '@/services/cookiesTreatment.js'
 
 export default {
   name: 'GalleryWebcams',
@@ -66,18 +67,27 @@ export default {
     location: function(newLocation, oldLocation){
       console.log("Location changed from " + oldLocation + " to " + newLocation)
 
+      // Get last locations saved
+      let lastLocations = getCookie("location")
+
       // Handle if location is a city or a gps point
-      let method = newLocation[1]
+      let method = newLocation.split("-")[1]
       if (method == 'GPS coordinates'){
         // Need to split and concatenate
         let location_as_gps = this.location[0].split(/(?:,| )+/)
         if (!isNaN(location_as_gps[0]) && isNaN(location_as_gps[0])){
           this.getWebcamsData(location_as_gps, this.limit)
+
+          // Save as cookie
+          setCookie("location", [lastLocations, newLocation], 7)
         } else {
           this.allWebcams = []
         }
       } else {
-        this.getGeolocationFromCity(newLocation[0])
+        // Save as cookie
+        setCookie("location", [lastLocations, newLocation], 7)
+
+        this.getGeolocationFromCity(newLocation.split("-")[0])
       }
     },
     limit: function(newLimit, oldLimit){
@@ -105,10 +115,15 @@ export default {
     },
 
     async getGeolocationFromCity(location) {
-      let data = await getGeolocationData(location)
-      data = data[0].latitude + "," + data[0].longitude
-      this.location_as_gps = data.split(/(?:,| )+/)
-      this.getWebcamsData(this.location_as_gps, this.limit)
+      try {
+        let data = await getGeolocationData(location)
+        data = data[0].latitude + "," + data[0].longitude
+        this.location_as_gps = data.split(/(?:,| )+/)
+        this.getWebcamsData(this.location_as_gps, this.limit)
+      } catch (error) {
+        console.log(error)
+        this.allWebcams = []
+      }
     }
   }
   

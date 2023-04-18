@@ -12,13 +12,13 @@
                     <span>Search by</span>
                 </template>
             </i-select>
-            <i-input v-model="search" 
+            <i-input v-model="search"
 
             v-if="searchOption.label == 'GPS coordinates'"
             placeholder="Type GPS decimal coordinates.."
             >
                 <template #append>
-                    <i-button v-on:click="this.$emit('update:search', [this.search, this.searchOption.label])" color="primary">
+                    <i-button v-on:click="this.$emit('update:search', this.search  + '-' + this.searchOption.label)" color="primary">
                         <i-icon name="ink-search" />
                     </i-button>
                 </template>
@@ -30,12 +30,12 @@
             placeholder="Type city name.."
             >
                 <template #append>
-                    <i-button v-on:click="this.$emit('update:search', [this.search, this.searchOption.label])" color="primary">
+                    <i-button v-on:click="this.$emit('update:search', this.search + '-' + this.searchOption.label)" color="primary">
                         <i-icon name="ink-search" />
                     </i-button>
                 </template>
             </i-input>
-        </div>
+       </div>
 
         <div id="inline">
             <i-select id="selectNbCameras"
@@ -128,5 +128,10 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.checkbox:hover{
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 </style>
