@@ -1,4 +1,6 @@
 # Webcams over the world
+I made this project to learn Vue.js during my fourth semester of IMAC. I decided to exploit data from the Windy API to display webcams around the world. I also wanted to do something to transform city into gps coordinates.
+It's not perfect but it's a good start. I hope you'll enjoy it.
 
 ## Project setup
 ```
@@ -25,6 +27,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Look for inspirations
-https://api.windy.com/api/webcams/v2/list/orderby=popularity/nearby=45.795429157006346,6.715087202217397,10/limit=5?show=webcams:player&key=cCzlu11lXZ8slp53bMbXvfv48AuOy8op
-
 https://github.com/JeanFabry/European-meteorological-webcams/blob/master/script.js
