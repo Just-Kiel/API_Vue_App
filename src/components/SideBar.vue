@@ -50,4 +50,7 @@ export default {
 </script>
 
 <style scoped>
+.nav-item {
+    cursor: pointer;
+}
 </style>
