@@ -73,9 +73,13 @@ export default {
       // Handle if location is a city or a gps point
       let method = newLocation.split("-")[1]
       if (method == 'GPS coordinates'){
+        console.log("GPS coordinates")
+        
         // Need to split and concatenate
-        let location_as_gps = this.location[0].split(/(?:,| )+/)
-        if (!isNaN(location_as_gps[0]) && isNaN(location_as_gps[0])){
+        let location_as_gps = newLocation.split("-")[0].split(/(?:,| )+/)
+  
+        if (!isNaN(location_as_gps[0]) && !isNaN(location_as_gps[1])){
+          console.log("GPS coordinates are valid")
           this.getWebcamsData(location_as_gps, this.limit)
 
           // Save as cookie

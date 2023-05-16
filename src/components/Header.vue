@@ -2,21 +2,15 @@
     <i-header id="cover-header" size="sm" class="_text-align:center">
         <h1>Webcams worldwide</h1>
         <p>All webcams of the world available.</p>
+
         <div id="inline">
-            <i-select
-                v-model="searchOption"
-                :options="searchOptions"
-                size="sm"
-            >
+            <i-select v-model="searchOption" :options="searchOptions" size="sm">
                 <template #prepend>
                     <span>Search by</span>
                 </template>
             </i-select>
-            <i-input v-model="search"
 
-            v-if="searchOption.label == 'GPS coordinates'"
-            placeholder="Type GPS decimal coordinates.."
-            >
+            <i-input v-model="search" v-if="searchOption.label == 'GPS coordinates'" placeholder="Type GPS decimal coordinates..">
                 <template #append>
                     <i-button v-on:click="this.$emit('update:search', this.search  + '-' + this.searchOption.label)" color="primary">
                         <i-icon name="ink-search" />
@@ -24,11 +18,7 @@
                 </template>
             </i-input>
 
-            <i-input v-model="search" 
-
-            v-else-if="searchOption.label == 'City name'"
-            placeholder="Type city name.."
-            >
+            <i-input v-model="search" v-else-if="searchOption.label == 'City name'" placeholder="Type city name..">
                 <template #append>
                     <i-button v-on:click="this.$emit('update:search', this.search + '-' + this.searchOption.label)" color="primary">
                         <i-icon name="ink-search" />
@@ -46,13 +36,8 @@
                 placeholder="Choose number of max cameras.."
             />
 
-            <i-checkbox-group id="inline" v-model="checkedTime" 
-            v-on:change="$emit('update:checkedTime', this.checkedTime)">
-                <i-checkbox 
-                    v-for="checkbox in optionsTimeCamera"
-                    v-bind:key="checkbox.value"
-                    v-bind:value = "checkbox.label"
-                >
+            <i-checkbox-group id="inline" v-model="checkedTime" v-on:change="$emit('update:checkedTime', this.checkedTime)">
+                <i-checkbox v-for="checkbox in optionsTimeCamera" v-bind:key="checkbox.value" v-bind:value = "checkbox.label">
                     {{checkbox.label}}
                 </i-checkbox>
             </i-checkbox-group>

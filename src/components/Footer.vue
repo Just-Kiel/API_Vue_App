@@ -13,12 +13,7 @@
 
 <script>
 export default {
-    name: 'FooterHome',
-    data() {
-        return {
-            
-        }
-    }
+    name: 'FooterHome'
 }
 </script>
 
