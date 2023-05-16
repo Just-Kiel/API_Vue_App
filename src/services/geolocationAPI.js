@@ -3,7 +3,7 @@ import axios from "axios"
 const getGeolocationData = async function(city){
     let endpoint = "https://api.api-ninjas.com/v1/";
 
-    let url = endpoint + `geocoding?city=${city}`;
+    let url = endpoint + `city?name=${city}`;
 
     let config = {
         headers: {
